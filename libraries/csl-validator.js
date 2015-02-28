@@ -93,9 +93,14 @@ var CSLValidator = (function() {
 
         responseStartTime = new Date();
         responseTimer = window.setTimeout(reportTimeOut, responseMaxTime);
-
-        var schemaURL = "https://raw.githubusercontent.com/citation-style-language/schema/v" + $('#schema-version').val() + "/csl.rnc";
-        schemaURL += " " + "https://raw.githubusercontent.com/citation-style-language/schema/master/csl.sch";
+        
+        var cslVersion = $('#schema-version').val()
+        if (cslVersion.indexOf("mlz") > -1) {
+            var schemaURL = "https://raw.githubusercontent.com/fbennett/schema/v" + cslVersion + "/csl-mlz.rnc";
+        } else {
+            var schemaURL = "https://raw.githubusercontent.com/citation-style-language/schema/v" + cslVersion + "/csl.rnc";
+        }
+        //schemaURL += " " + "https://raw.githubusercontent.com/citation-style-language/schema/master/csl.sch";
 
         var sourceMethod = $('#source-method').val();
 
@@ -111,6 +116,7 @@ var CSLValidator = (function() {
                 if ($.trim(documentURL).length > 0) {
                     validateViaGET(schemaURL, documentURL);
                 } else {
+                    window.clearTimeout(responseTimer);
                     validateButton.stop();
                 }
 
