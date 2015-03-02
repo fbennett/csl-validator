@@ -9,9 +9,11 @@
     <link rel="icon" type="image/png" href="favicon-32x32.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/css/bootstrap-theme.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <link rel="stylesheet" href="libraries/jquery-ui.1.11.3.min.css">
+    <script src="libraries/jquery.1.11.3.min.js"></script>
+    <script src="libraries/jquery-ui.1.11.3.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Ladda/0.9.7/ladda.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Ladda/0.9.7/ladda-themeless.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Ladda/0.9.7/spin.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Ladda/0.9.7/ladda.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/URI.js/1.11.2/URI.min.js"></script>
@@ -35,8 +37,12 @@
         ga('create', 'UA-42952194-1', 'auto');
         ga('send', 'pageview');
     </script>
+    <script>
+      $(function() {
+      $( "#tabs" ).tabs();
+      });
+    </script>
 </head>
-
 <body>
     <div class="container-fluid">
         <div class="navbar navbar-default" role="navigation">
@@ -76,17 +82,23 @@
             </div>
             <div class="form-group">
                 <div class="col-sm-9 col-sm-offset-2">
-                    <button id="validate" type="button" data-color="green" class="btn btn-primary ladda-button" data-style="expand-left"><span class="ladda-label" data-color="green">Validate</span>
+                    <button id="validate" type="button" class="btn btn-primary ladda-button" data-style="expand-left"><span class="ladda-label">Validate</span>
                     </button>
                 </div>
             </div>
         </form>
         <hr/>
         <div id="alert"></div>
-        <div id="errors">
+        <div id="tabs">
+          <ul>
+            <li><a id="source-tab" href="#source">Juris-M Style</a></li>
+            <li><a id="errors-tab" href="#errors">Errors</a></li>
+          </ul>
+          <div id="source"></div>
+          <div id="errors">
             <ol id="error-list"></ol>
+          </div>
         </div>
-        <div id="source"></div>
         <div id="footer"><small>Created by <a href="http://rintze.zelle.me/">Rintze M. Zelle</a>. Tweaked for Juris-M by <a href="http://citationstylist.org">Frank Bennett</a>. Powered by <a href="http://validator.w3.org/nu/">Nu HTML Checker</a> and GitHub Pages. <a href="https://github.com/juris-m/csl-validator">Code</a> on GitHub.</small>
         </div>
     </div>
