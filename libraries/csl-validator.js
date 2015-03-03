@@ -226,8 +226,8 @@ var CSLValidator = (function() {
                 results += '<div id="error-' + errorCount + '"/>';
                 results += "</li>";
                 $("#error-list").append(results);
-/*
                 $("#error-" + errorCount).text(messages[i].extract);
+/*
 
                 var errorDiv = ace.edit("error-" + errorCount);
                 errorDiv.setReadOnly(true);
