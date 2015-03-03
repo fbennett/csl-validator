@@ -26,8 +26,12 @@ var CSLValidator = (function() {
         //Create range for Ace editor
         Range = ace.require("ace/range").Range;
 
-        //Initialize Ladda button
+        //Initialize Ladda buttons
         validateButton = Ladda.create(document.querySelector('#validate'));
+        saveButton = Ladda.create(document.querySelector('#save'));
+        saveButton.disable();
+        submitButton = Ladda.create(document.querySelector('#submit'));
+        submitButton.disable();
 
         //set schema-version if specified
         if (uri.hasQuery('version')) {
@@ -57,6 +61,9 @@ var CSLValidator = (function() {
 
         //validate on button click
         $("#validate").click(validate);
+
+        //save on button click
+        $("#save").click(saveFile);
 
         //validate when pressing Enter in URL text field
         $('#source-url').keydown(function(event) {
@@ -184,6 +191,24 @@ var CSLValidator = (function() {
         });
     }
 
+    function saveFile() {
+        var xmlStr = editor.getSession().getValue();
+        var fileName = "SomeFileName.txt"
+        m = xmlStr.match(/.*<id>.*\/(.*)<\/id>/);
+        if (m) {
+            fileName = m[1] + ".csl";
+        }
+        xmlStr = '<?xml version="1.0" encoding="utf-8"?>' + xmlStr;
+        xmlStr = btoa(xmlStr);
+        var a = document.createElement('a');
+        var ev = document.createEvent("MouseEvents");
+        a.href = "data:application/octet-stream;charset=utf-8;base64,"+xmlStr;
+        a.download = fileName;
+        ev.initMouseEvent("click", true, false, self, 0, 0, 0, 0, 0,
+                          false, false, false, false, 0, null);
+        a.dispatchEvent(ev);
+    }
+
     function parseResponse(data) {
         //console.log(JSON.stringify(data));
 
@@ -230,15 +255,11 @@ var CSLValidator = (function() {
         }
 
         if (nonDocumentError !== "") {
-            $("#errors-tab").click();
             $("#alert").append('<div class="inserted alert alert-warning" role="alert">Validation failed: ' + nonDocumentError + '</div>');
         } else if (errorCount === 0) {
-            $("#source-tab").click();
             $("#tabs").tabs("disable", "#errors");
             $("#alert").append('<div class="inserted alert alert-success" role="alert">Good job! No errors found.</br><small>Interested in contributing your style or locale file? See our <a href="https://github.com/citation-style-language/styles/blob/master/CONTRIBUTING.md">instructions</a>.</small></div>');
         } else if (errorCount > 0) {
-            $("#source-tab").click();
-            $("#errors-tab").click();
             if (errorCount == 1) {
                 $("#alert").append('<div class="inserted alert alert-danger" role="alert">Oops, I found 1 error.</div>');
             } else {
@@ -258,15 +279,27 @@ var CSLValidator = (function() {
             $("#source-code").text(data.source.code);
 
             window.editor = ace.edit("source-code");
-            editor.setReadOnly(true);
+            editor.setReadOnly(false);
             editor.getSession().setUseWrapMode(true);
             editor.setHighlightActiveLine(true);
-            editor.renderer.$cursorLayer.element.style.opacity = 0;
+            editor.renderer.$cursorLayer.element.style.opacity = 1;
             editor.setTheme("ace/theme/eclipse");
             editor.getSession().setMode("ace/mode/xml");
+            editor.commands.addCommand({
+                name: 'saveFile',
+                bindKey: {
+                    win: 'Ctrl-S',
+                    mac: 'Command-S',
+                    sender: 'editor|cli'
+                },
+                exec: function(env, args, request) {
+                    saveFile();
+                }
+            });
         }
-
+        
         validateButton.stop();
+        saveButton.enable();
     }
 
     function moveToLine(firstLine, firstColumn, lastLine, lastColumn) {
