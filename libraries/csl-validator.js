@@ -225,6 +225,7 @@ var CSLValidator = (function() {
                 results += messages[i].message;
                 results += '<div id="error-' + errorCount + '"/>';
                 results += "</li>";
+/*
                 $("#error-list").append(results);
                 $("#error-" + errorCount).text(messages[i].extract);
 
@@ -252,6 +253,7 @@ var CSLValidator = (function() {
 
                 $("#error-" + errorCount).height(newHeight.toString() + "px");
                 errorDiv.resize();
+*/
             }
         }
 
