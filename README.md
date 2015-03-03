@@ -1,7 +1,7 @@
 Juris-M Validator
 =================
 
-The Juris-M Validator is a slightly modified version of the CSL Validator.
+The Juris-M Validator is based on the CSL Validator by Rintze Zelle.
 
 The CSL Validator is released under the MIT license.
 
