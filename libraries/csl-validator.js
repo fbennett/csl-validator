@@ -222,13 +222,12 @@ var CSLValidator = (function() {
                 sourceHighlightRange = firstLine + ',' + firstColumn + ',' + lastLine + ',' + lastColumn;
                 results += '<a href="#source-code" onclick="CSLValidator.moveToLine(' + sourceHighlightRange + ');">' + lineText + '</a>: ';
 
-/*
                 results += messages[i].message;
                 results += '<div id="error-' + errorCount + '"/>';
                 results += "</li>";
                 $("#error-list").append(results);
                 $("#error-" + errorCount).text(messages[i].extract);
-*/
+/*
                 var errorDiv = ace.edit("error-" + errorCount);
                 errorDiv.setReadOnly(true);
                 errorDiv.getSession().setUseWrapMode(true);
@@ -237,6 +236,7 @@ var CSLValidator = (function() {
                 errorDiv.renderer.$cursorLayer.element.style.opacity = 0;
                 errorDiv.setTheme("ace/theme/kuroir");
                 errorDiv.getSession().setMode("ace/mode/xml");
+*/
 
                 lineDifference = lastLine - firstLine;
                 if (firstLine == 1) {
