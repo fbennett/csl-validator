@@ -220,39 +220,12 @@ var CSLValidator = (function() {
                     lineText = "Line " + lastLine;
                 }
                 sourceHighlightRange = firstLine + ',' + firstColumn + ',' + lastLine + ',' + lastColumn;
-                results += '<a href="#source-code" onclick="CSLValidator.moveToLine(' + sourceHighlightRange + ');">' + lineText + '</a>: ';
+                results += '<a style="text-decoration:none;padding:0.25em;border-radius:0.5em;border:1px solid black;" href="#source-code" onclick="CSLValidator.moveToLine(' + sourceHighlightRange + ');">' + lineText + '</a>: ';
 
-/*
                 results += messages[i].message;
-                results += '<div id="error-' + errorCount + '"/>';
                 results += "</li>";
                 $("#error-list").append(results);
                 $("#error-" + errorCount).text(messages[i].extract);
-*/
-                var errorDiv = ace.edit("error-" + errorCount);
-                errorDiv.setReadOnly(true);
-                errorDiv.getSession().setUseWrapMode(true);
-                errorDiv.renderer.setShowGutter(false);
-                errorDiv.setHighlightActiveLine(false);
-                errorDiv.renderer.$cursorLayer.element.style.opacity = 0;
-                errorDiv.setTheme("ace/theme/kuroir");
-                errorDiv.getSession().setMode("ace/mode/xml");
-
-                lineDifference = lastLine - firstLine;
-                if (firstLine == 1) {
-                    firstLine = firstLine - 1;
-                } else {
-                    firstLine = 1;
-                }
-                lastLine = firstLine + lineDifference;
-                errorHighlightRange = new Range(firstLine, firstColumn - 1, lastLine, lastColumn);
-                errorDiv.session.addMarker(errorHighlightRange, "ace_active-line", "text");
-
-                var newHeight =
-                    errorDiv.getSession().getScreenLength() * errorDiv.renderer.lineHeight + errorDiv.renderer.scrollBar.getWidth();
-
-                $("#error-" + errorCount).height(newHeight.toString() + "px");
-                errorDiv.resize();
             }
         }
 
