@@ -223,7 +223,7 @@ var CSLValidator = (function() {
                 results += '<a href="#source-code" onclick="CSLValidator.moveToLine(' + sourceHighlightRange + ');">' + lineText + '</a>: ';
 
                 results += messages[i].message;
-                results += '<div id="error-' + errorCount + '"/>';
+                //results += '<div id="error-' + errorCount + '"/>';
                 results += "</li>";
                 $("#error-list").append(results);
                 $("#error-" + errorCount).text(messages[i].extract);
