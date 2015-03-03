@@ -222,12 +222,13 @@ var CSLValidator = (function() {
                 sourceHighlightRange = firstLine + ',' + firstColumn + ',' + lastLine + ',' + lastColumn;
                 results += '<a href="#source-code" onclick="CSLValidator.moveToLine(' + sourceHighlightRange + ');">' + lineText + '</a>: ';
 
+/*
                 results += messages[i].message;
                 results += '<div id="error-' + errorCount + '"/>';
                 results += "</li>";
                 $("#error-list").append(results);
                 $("#error-" + errorCount).text(messages[i].extract);
-
+*/
                 var errorDiv = ace.edit("error-" + errorCount);
                 errorDiv.setReadOnly(true);
                 errorDiv.getSession().setUseWrapMode(true);
