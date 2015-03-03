@@ -220,7 +220,7 @@ var CSLValidator = (function() {
                     lineText = "Line " + lastLine;
                 }
                 sourceHighlightRange = firstLine + ',' + firstColumn + ',' + lastLine + ',' + lastColumn;
-                results += '<a style="border-radius:0.5em;border:1px solid black;" href="#source-code" onclick="CSLValidator.moveToLine(' + sourceHighlightRange + ');">' + lineText + '</a>: ';
+                results += '<a style="text-decoration:none;padding:0.25em;border-radius:0.5em;border:1px solid black;" href="#source-code" onclick="CSLValidator.moveToLine(' + sourceHighlightRange + ');">' + lineText + '</a>: ';
 
                 results += messages[i].message;
                 results += "</li>";
