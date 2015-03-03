@@ -295,6 +295,7 @@ var CSLValidator = (function() {
     }
 
     function moveToLine(firstLine, firstColumn, lastLine, lastColumn) {
+        $("#source-tab").click();
         editor.scrollToLine(firstLine, true, true, function() {});
         editor.gotoLine(firstLine, 0, false);
         //alert(firstLine + "," + firstColumn + "," + lastLine + "," + lastColumn);
