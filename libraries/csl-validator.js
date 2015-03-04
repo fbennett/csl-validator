@@ -181,7 +181,7 @@ var CSLValidator = (function() {
 
         $.ajax({
             type: "POST",
-            url: "http://validator.w3.org/nu/",
+            url: "http://our.law.nagoya-u.ac.jp/validate/",
             data: formData,
             success: function(data) {
                 parseResponse(data);
@@ -214,7 +214,7 @@ var CSLValidator = (function() {
 
         window.clearTimeout(responseTimer);
         responseEndTime = new Date();
-        console.log("Received response from http://validator.w3.org/nu/ after " + (responseEndTime - responseStartTime) + "ms");
+        console.log("Received response from http://our.law.nagoya-u.ac.jp/validate/ after " + (responseEndTime - responseStartTime) + "ms");
 
         removeValidationResults();
 
