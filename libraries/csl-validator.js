@@ -150,7 +150,7 @@ var CSLValidator = (function() {
     }
 
     function validateViaGET(schemaURL, documentURL) {
-        $.get("http://validator.w3.org/nu/", {
+        $.get("http://our.law.nagoya-u.ac.jp/validate/", {
                 doc: documentURL,
                 schema: schemaURL,
                 parser: "xml",
@@ -320,9 +320,9 @@ var CSLValidator = (function() {
 
     function reportTimeOut() {
         validateButton.stop();
-        console.log("Call to http://validator.w3.org/nu/ timed out after " + responseMaxTime + "ms.");
+        console.log("Call to http://our.law.nagoya-u.ac.jp/validate/ timed out after " + responseMaxTime + "ms.");
         $("#alert").append('<div class="inserted alert alert-warning" role="alert">Validation is taking longer than expected! (more than ' + responseMaxTime/1000 + ' seconds)</div>');
-        $("#alert > div.alert-warning").append('</br><small>This typically happens if the <a href="http://validator.w3.org/nu/">Nu HTML Checker</a> website is down, but maybe you get lucky if you wait a little longer.</small>');
+        $("#alert > div.alert-warning").append('</br><small>This typically happens if the <a href="http://our.law.nagoya-u.ac.jp/validate/">Nu HTML Checker</a> website is down, but maybe you get lucky if you wait a little longer.</small>');
     }
 
     return {
