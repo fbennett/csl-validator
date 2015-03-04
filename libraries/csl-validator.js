@@ -150,7 +150,7 @@ var CSLValidator = (function() {
     }
 
     function validateViaGET(schemaURL, documentURL) {
-        $.get("http://validator.w3.org/nu/", {
+        $.get("http://our.law.nagoya-u.ac.jp/validate/", {
                 doc: documentURL,
                 schema: schemaURL,
                 parser: "xml",
@@ -181,7 +181,7 @@ var CSLValidator = (function() {
 
         $.ajax({
             type: "POST",
-            url: "http://validator.w3.org/nu/",
+            url: "http://our.law.nagoya-u.ac.jp/validate/",
             data: formData,
             success: function(data) {
                 parseResponse(data);
@@ -214,7 +214,7 @@ var CSLValidator = (function() {
 
         window.clearTimeout(responseTimer);
         responseEndTime = new Date();
-        console.log("Received response from http://validator.w3.org/nu/ after " + (responseEndTime - responseStartTime) + "ms");
+        console.log("Received response from http://our.law.nagoya-u.ac.jp/validate/ after " + (responseEndTime - responseStartTime) + "ms");
 
         removeValidationResults();
 
@@ -245,7 +245,7 @@ var CSLValidator = (function() {
                     lineText = "Line " + lastLine;
                 }
                 sourceHighlightRange = firstLine + ',' + firstColumn + ',' + lastLine + ',' + lastColumn;
-                results += '<a style="text-decoration:none;padding:0.25em;border-radius:0.5em;border:1px solid black;" href="#source-code" onclick="CSLValidator.moveToLine(' + sourceHighlightRange + ');">' + lineText + '</a>: ';
+                results += '<a style="text-decoration:none;padding:0.25em;border-radius:0.5em;border:1px solid black;" href="#source-code" onclick="CSLValidator.moveToLine(event,' + sourceHighlightRange + ');">' + lineText + '</a>: ';
 
                 results += messages[i].message;
                 results += "</li>";
@@ -302,8 +302,18 @@ var CSLValidator = (function() {
         saveButton.enable();
     }
 
-    function moveToLine(firstLine, firstColumn, lastLine, lastColumn) {
+    function moveToLine(event,firstLine, firstColumn, lastLine, lastColumn) {
         $("#source-tab").click();
+        $("#error-banner").remove();
+        var errorNode = $('<div id="error-banner" class="inserted" style="display:inline;margin-left:1em;background:#white;border-radius:0.5em;border:1px solid #aaaaaa;padding:0.33em;"><span style="font-weight:bold;">ERROR @ </span><span>').get(0);
+        var infoNode = event.target.parentNode.cloneNode(true);
+        lineNumber = infoNode.firstChild;
+        lineNumber.removeAttribute('onclick');
+        lineNumber.setAttribute('style', 'color:white;font-weight:bold;text-size:smaller;border:none;');
+        errorNode.appendChild(infoNode.firstChild);
+        errorNode.appendChild(infoNode.lastChild);
+        $("#source h4.panel-title").attr('style', 'display:inline;').after(errorNode);
+
         editor.scrollToLine(firstLine, true, true, function() {});
         editor.gotoLine(firstLine, 0, false);
         //alert(firstLine + "," + firstColumn + "," + lastLine + "," + lastColumn);
@@ -320,9 +330,9 @@ var CSLValidator = (function() {
 
     function reportTimeOut() {
         validateButton.stop();
-        console.log("Call to http://validator.w3.org/nu/ timed out after " + responseMaxTime + "ms.");
+        console.log("Call to http://our.law.nagoya-u.ac.jp/validate/ timed out after " + responseMaxTime + "ms.");
         $("#alert").append('<div class="inserted alert alert-warning" role="alert">Validation is taking longer than expected! (more than ' + responseMaxTime/1000 + ' seconds)</div>');
-        $("#alert > div.alert-warning").append('</br><small>This typically happens if the <a href="http://validator.w3.org/nu/">Nu HTML Checker</a> website is down, but maybe you get lucky if you wait a little longer.</small>');
+        $("#alert > div.alert-warning").append('</br><small>This typically happens if the <a href="http://our.law.nagoya-u.ac.jp/validate/">Nu HTML Checker</a> website is down, but maybe you get lucky if you wait a little longer.</small>');
     }
 
     return {
