@@ -82,7 +82,7 @@ var CSLValidator = (function() {
                 inputField = '<input id="source-url" class="form-control source-input">';
                 break;
             case "file-upload":
-                inputField = '<input id="source-file" class="source-input" type="file">';
+                inputField = '<div class="source-input form-control" style="display:inline;"><input style="display:inline;" id="source-file" type="file"></div>';
                 break;
             case "textarea":
                 inputField = '<textarea id="source-text" class="form-control source-input" rows="15"></textarea>';

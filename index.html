@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html>
-
-<head>
+<html lang="en">
+  <head>
     <title>Juris-M Style Manager</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="favicon-32x32.png">
+    <link href='http://fonts.googleapis.com/css?family=Nunito' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="libraries/jquery-ui.1.11.3.min.css">
@@ -20,98 +20,95 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.1.8/ace.js"></script>
     <script src="libraries/csl-validator.js"></script>
     <style type="text/css" media="screen">
-        #source-code {
-            height: 400px;
-        }
-        li.inserted {
-            padding-top: 5px;
-            padding-bottom: 5px;
-        }
+      #source-code {
+      height: 400px;
+      }
+      li.inserted {
+      padding-top: 5px;
+      padding-bottom: 5px;
+      }
     </style>
     <script>
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-        ga('create', 'UA-42952194-1', 'auto');
-        ga('send', 'pageview');
+      ga('create', 'UA-42952194-1', 'auto');
+      ga('send', 'pageview');
     </script>
     <script>
       $(function() {
       $( "#tabs" ).tabs();
       });
     </script>
-</head>
-<body>
-    <div class="container-fluid">
-        <div class="navbar navbar-default" role="navigation">
-            <div class="navbar-header">
-                <div class="navbar-brand">Juris-M Style Manager</div>
-                <div class="navbar-text">
-                 <a class="active" style="font-variant:small-caps;" href="..">Juris-M</a>
-                </div>
-                <div class="navbar-text">
-                 <a class="active" style="font-variant:small-caps;" href="http://citationstylist.org">CitationStylist.org</a>
-                </div>
-                <div class="navbar-text">
-                  <a class="active" href="http://citationstyles.org/">CitationStyles.org</a> 
-                </div>
-            </div>
-        </div>
-        <form class="form-horizontal" autocomplete="off" role="form">
-            <div class="form-group" title="The version of the Juris-M schema to validate against.">
-                <label for="schema-version" class="col-sm-2 control-label">Juris-M schema version</label>
-                <div class="col-sm-9">
-                    <select id="schema-version" class="form-control" style="width:auto">
-                        <option value="1.1mlz1">1.1mlz1 (current Juris-M)</option>
-                        <option value="1.0.1">1.0.1 (CSL only)</option>
-                        <option value="1.0">1.0 (CSL only)</option>
-                        <option value="0.8.1">0.8.1 (CSL styles only)</option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-group" title="The Juris-M XML file to validate.">
-                <div class="col-sm-2">
-                    <select id="source-method" class="form-control pull-right" style="width:auto">
-                        <option value="url">URL</option>
-                        <option value="file-upload">File Upload</option>
-                        <option value="textarea">Text Field</option>
-                    </select>
-                </div>
-                <div class="col-sm-9">
-                    <input id="source-url" class="form-control source-input">
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-9 col-sm-offset-2">
-                    <button id="validate" type="button" class="btn btn-primary ladda-button" data-style="expand-left"><span class="ladda-label">Validate</span></button>
-                    <button id="save" type="button" class="btn btn-primary ladda-button" data-style="expand-left"><span class="ladda-label">Save</span></button>
-                    <button id="submit" type="button" class="btn btn-primary ladda-button" data-style="expand-left"><span class="ladda-label">Submit</span></button>
-                </div>
-
-            </div>
-        </form>
-        <hr/>
-        <div id="alert"></div>
-        <div id="tabs">
-          <ul>
-            <li><a id="source-tab" href="#source">Juris-M Style</a></li>
-            <li><a id="errors-tab" href="#errors">Errors</a></li>
-          </ul>
-          <div id="source"></div>
-          <div id="errors">
-            <ol id="error-list"></ol>
+  </head>
+  <body>
+    <div class="container">
+      <h1 style="margin-bottom:0.5em;" onclick="document.location.href='..'">
+        <span  style="border-radius:1em;background:#a0a0a0;padding:0.20em 0.3em 0.36em 0.3em;">
+          <span  style="border-radius:1em;background:white;padding:0.17em 0.4em 0.33em 0.4em;">
+            <span style="font-family: Nunito, sans-serif;vertical-align:middle;">Juris-</span><img style="padding-left:0.08em;height:1.2em;vertical-align:middle;" src="mlz-button-big.png">
+          </span>
+        </span>
+      </h1>
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Home</a></li>
           </div>
-        </div>
-        <div id="footer"><small>Created by <a href="http://rintze.zelle.me/">Rintze M. Zelle</a>. Tweaked for Juris-M by <a href="http://citationstylist.org">Frank Bennett</a>. Powered by <a href="http://validator.w3.org/nu/">Nu HTML Checker</a> and GitHub Pages. <a href="https://github.com/juris-m/csl-validator">Code</a> on GitHub.</small>
-        </div>
-    </div>
-    <script type="text/javascript">
-        $().ready(function() {
-            CSLValidator.init();
-        });
-    </script>
-</body>
 
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="#">Style Manager<span class="sr-only">(current)</span></a></li>
+            </ul>
+	    <form autocomplete="off" class="navbar-form navbar-left" role="form">
+	      <div class="form-group">
+		<select class="form-control" id="schema-version">
+                  <option value="1.1mlz1">Juris-M</option>
+                  <option value="1.0.1">CSL 1.0.1</option>
+                  <option value="1.0">CSL 1.0</option>
+                  <option value="0.8.1">CSL 0.8.1</option>
+                </select>
+                <select id="source-method" class="form-control">
+                  <option value="url">URL</option>
+                  <option value="file-upload">File Upload</option>
+                  <!-- option value="textarea">Text Field</option -->
+                </select>
+                <input class="source-input" id="source-url">
+              </div>
+            </form>
+          </div><!-- /.navbar-collapse -->
+	</div><!-- /.container-fluid -->
+      </nav>
+      <button id="validate" type="button" class="btn btn-primary ladda-button" data-style="expand-left"><span class="ladda-label">Validate</span></button>
+      <button id="save" type="button" class="btn btn-primary ladda-button" data-style="expand-left"><span class="ladda-label">Save</span></button>
+      <button id="submit" type="button" class="btn btn-primary ladda-button" data-style="expand-left"><span class="ladda-label">Submit</span></button>
+      <div id="alert"></div>
+      <div id="tabs">
+	<ul>
+          <li><a id="source-tab" href="#source">Juris-M Style</a></li>
+          <li><a id="errors-tab" href="#errors">Errors</a></li>
+	</ul>
+	<div id="source"></div>
+	<div id="errors">
+          <ol id="error-list"></ol>
+	</div>
+      </div>
+      <div id="footer"><small>Created by <a href="http://rintze.zelle.me/">Rintze M. Zelle</a>. Tweaked for Juris-M by <a href="http://citationstylist.org">Frank Bennett</a>. Powered by <a href="http://validator.w3.org/nu/">Nu HTML Checker</a> and GitHub Pages. <a href="https://github.com/juris-m/csl-validator">Code</a> on GitHub.</small>
+      </div>
+      <script type="text/javascript">
+	$().ready(function() {
+	CSLValidator.init();
+	});
+      </script>
+  </body>
 </html>
